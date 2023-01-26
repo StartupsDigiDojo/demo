@@ -13,6 +13,8 @@ public class UserManagementService {
         String username = user.getUsername();
         if (users.contains(user)) throw new IllegalArgumentException("Username "+ username +" already in use");
 
+        user.setId(users.size() + 1);
+
         users.add(user);
 
         return user;

@@ -26,6 +26,18 @@ class UserManagementServiceTest {
     }
 
     @Test
+    void itGivesAnIDWhenCreating() {
+        // given
+        User user = new User("username", "email@mail.com");
+
+        // when
+        User result = underTest.createUser(user);
+
+        // then
+        assertEquals(1, result.getId());
+    }
+
+    @Test
     void itThrowsWhenCreatingADuplicateUsername() {
         // given
         User user = new User("something", "something@mail.com");
