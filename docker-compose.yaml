@@ -10,8 +10,22 @@ services:
       - 8080:8080
     volumes:
       - ./build:/usr/src/digidojo/build
+    command: ["bootRun"]
     depends_on:
       - devbuilder
+
+  tests:
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/usr/src/digidojo/src
+    command: ["test", "--continuous"]
+    depends_on:
+      - devbuilder
+    profiles:
+      - test
 
   devbuilder:
     build:

@@ -27,7 +27,7 @@ CMD gradle build --continuous
 
 FROM base AS development
 
-CMD gradle bootRun
+ENTRYPOINT ["gradle"]
 
 
 
