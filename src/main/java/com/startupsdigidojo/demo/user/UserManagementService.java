@@ -7,13 +7,14 @@ import java.util.Set;
 
 @Service
 public class UserManagementService {
-    private final Set<String> usernames = new HashSet<>();
+    private final Set<User> users = new HashSet<>();
 
-    public String createUser(String username) {
-        if (usernames.contains(username)) throw new IllegalArgumentException("Username "+ username +" already in use");
+    public User createUser(User user) {
+        String username = user.getUsername();
+        if (users.contains(user)) throw new IllegalArgumentException("Username "+ username +" already in use");
 
-        usernames.add(username);
+        users.add(user);
 
-        return username;
+        return user;
     }
 }

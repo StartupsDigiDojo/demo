@@ -16,22 +16,22 @@ class UserManagementServiceTest {
     @Test
     void itCreatesWithANewUsername() {
         // given
-        String username = "something";
+        User user = new User("something", "something@mail.com");
 
         // when
-        String result = underTest.createUser(username);
+        User result = underTest.createUser(user);
 
         // then
-        assertEquals(result, username);
+        assertEquals(result.getUsername(), user.getUsername());
     }
 
     @Test
     void itThrowsWhenCreatingADuplicateUsername() {
         // given
-        String username = "something";
-        underTest.createUser(username);
+        User user = new User("something", "something@mail.com");
+        underTest.createUser(user);
 
         // then ... when
-        assertThrows(IllegalArgumentException.class, () -> underTest.createUser(username));
+        assertThrows(IllegalArgumentException.class, () -> underTest.createUser(user));
     }
 }
