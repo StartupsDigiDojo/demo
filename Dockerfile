@@ -1,7 +1,7 @@
-## BUILDER IMAGE
-# builds the project into an executable JAR
+## BASE IMAGE
+# defines basic configuration for both stages
 
-FROM gradle:7.4.2-jdk17 AS builder
+FROM gradle:7.4.2-jdk17 AS base
 
 USER gradle
 
@@ -10,6 +10,32 @@ WORKDIR /usr/src/digidojo
 RUN mkdir .gradle
 
 COPY --chown=gradle:gradle . ./
+
+
+
+## DEVELOPMENT BUILDER IMAGE
+# continuously builds the application
+
+FROM base AS devbuilder
+
+CMD gradle build --continuous
+
+
+
+## DEVELOPMENT RUNNER IMAGE
+# runs a development server
+
+FROM base AS development
+
+CMD gradle bootRun
+
+
+
+
+## BUILDER IMAGE
+# builds the project into an executable JAR
+
+FROM base AS builder
 
 RUN gradle clean bootJar
 

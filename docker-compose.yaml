@@ -4,7 +4,19 @@ services:
   server:
     build:
       context: .
-      target: runner
+      target: development
       dockerfile: Dockerfile
     ports:
       - 8080:8080
+    volumes:
+      - ./build:/usr/src/digidojo/build
+    depends_on:
+      - devbuilder
+
+  devbuilder:
+    build:
+      context: .
+      target: devbuilder
+      dockerfile: Dockerfile
+    volumes:
+      - ./build:/usr/src/digidojo/build
