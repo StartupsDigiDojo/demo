@@ -11,9 +11,7 @@ RUN mkdir .gradle
 
 COPY --chown=gradle:gradle . ./
 
-RUN gradle clean build
-
-RUN gradle shadowJar
+RUN gradle clean bootJar
 
 
 
@@ -28,6 +26,6 @@ ENV PORT=8080
 
 EXPOSE ${PORT}
 
-COPY --from=builder /usr/src/digidojo/build/libs/*-all.jar ./demo.jar
+COPY --from=builder /usr/src/digidojo/build/libs/*.jar ./demo.jar
 
 ENTRYPOINT ["java", "-jar", "/digidojo/demo.jar"]
