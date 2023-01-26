@@ -46,4 +46,27 @@ class UserManagementServiceTest {
         // then ... when
         assertThrows(IllegalArgumentException.class, () -> underTest.createUser(user));
     }
+
+    @Test
+    void itReadsAnExistingOneProvidedTheID() {
+        // given
+        User user = new User("fulano", "mail@mail.com");
+        user = underTest.createUser(user);
+        int id = user.getId();
+
+        // when
+        User result = underTest.readOne(id);
+
+        // then
+        assertEquals(user, result);
+    }
+
+    @Test
+    void itThrowsWhenReadingNonExistingID() {
+        // given
+        int id = 42;
+
+        // then ... when
+        assertThrows(IllegalArgumentException.class, () -> underTest.readOne(id));
+    }
 }
