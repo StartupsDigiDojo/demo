@@ -33,4 +33,4 @@ services:
       target: devbuilder
       dockerfile: Dockerfile
     volumes:
-      - ./build:/usr/src/digidojo/build
+      - ./:/usr/src/digidojo/
